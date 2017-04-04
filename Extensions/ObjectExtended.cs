@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Web.Script.Serialization;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Schema;
@@ -15,10 +16,10 @@ namespace nExtensions
     public static class ObjectExtended
     {
         public static string SerializeToJson (this object value)
-        { 
-            //var json = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(obj);
-            throw new NotImplementedException("Feature not available");
-            return null;
+        {
+			var serializer = new JavaScriptSerializer();
+			var serializedResult = serializer.Serialize(value);
+			return serializedResult;
         }
 
         public static string SerializeToXml<T> (this T value)

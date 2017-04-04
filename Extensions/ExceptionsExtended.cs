@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Web;
+using System.Runtime.Serialization;
 
 namespace nExtensions
 {
@@ -41,5 +38,20 @@ namespace nExtensions
                 }
             }
         }
+
+
+
+		[Serializable]
+		public class Error :Exception
+		{
+			public Error () : base() { }
+			public Error (string message) : base(message) { }
+			public Error (string format, params object[] args) : base(string.Format(format, args)) { }
+			public Error (string message, Exception innerException) : base(message, innerException) { }
+			public Error (string format, Exception innerException, params object[] args) : base(string.Format(format, args), innerException) { }
+			protected Error (SerializationInfo info, StreamingContext context) : base(info, context) { }
+		}
+
+
     }
 }
