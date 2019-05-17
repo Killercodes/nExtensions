@@ -9,7 +9,7 @@ namespace nExtensions
 	public static class FileExtended
 	{
 
-		public static string ReadFile (FileStream fileStream)
+		public static string ReadFile (this FileStream fileStream)
 		{
 			var sr = new StreamReader(fileStream);
 			sr.BaseStream.Seek(0, SeekOrigin.Begin);
@@ -22,7 +22,7 @@ namespace nExtensions
 			return str;
 		}
 
-		public static void WriteFile (FileStream fileStream, string content)
+		public static void WriteFile (this FileStream fileStream, string content)
 		{
 			if (fileStream.CanWrite)
 			{
