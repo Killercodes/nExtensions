@@ -12,6 +12,17 @@ namespace nExtensions
     public static class StringExtended
     {
 
+        public static Dictionary<string, string> ToDictionary(this string stringData, char propertyDelimiter = ';', char keyValueDelimiter = '=')
+        {
+            Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
+            Array.ForEach<string>(stringData.Split(propertyDelimiter), s =>
+            {
+                keyValuePairs.Add(s.Split(keyValueDelimiter)[0], s.Split(keyValueDelimiter)[1]);
+            });
+
+            return keyValuePairs;
+        }
+        
         public static void Speak(this string value)
         { 
             System.Speech.Synthesis.SpeechSynthesizer ssy = new System.Speech.Synthesis.SpeechSynthesizer();
