@@ -17,9 +17,9 @@ namespace nExtensions
     {
         public static string SerializeToJson (this object value)
         {
-			var serializer = new JavaScriptSerializer();
-			var serializedResult = serializer.Serialize(value);
-			return serializedResult;
+					var serializer = new JavaScriptSerializer();
+					var serializedResult = serializer.Serialize(value);
+					return serializedResult;
         }
 
         public static string SerializeToXml<T> (this T value)
@@ -43,6 +43,27 @@ namespace nExtensions
             reader.Close();
             return obj;
         }
+			
+			public static void SerializeToBinary<T>(this T Tobject ,string name)
+			{
+				BinaryFormatter binfmt = new BinaryFormatter();
+				using(FileStream stream = new FileStream(name + ".Cache",FileMode.Create))
+				{
+					binfmt.Serialize(stream, Tobject);
+				}
+			}
+	
+			public static T DeSerializeFromBinary<T>(string name)
+			{
+				BinaryFormatter binfmt = new BinaryFormatter();
+				T Tobject;
+				using(FileStream streamIn = new FileStream(name + ".Cache", FileMode.Open))
+				{
+					Tobject = (T)binfmt.Deserialize(streamIn);
+				}
+
+				return Tobject;
+			}
 
     }
    
